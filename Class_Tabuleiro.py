@@ -3,8 +3,8 @@ from numpy import False_
 import pygame
 from Class_Telas import Telas
 
-ORIENTACOES = ['R','R','R','D','D','R']
-PONTOS = [0,0,1,2,2,2]
+ORIENTACOES = ['R','R','R','D','D','R',"U"]
+PONTOS = [0,0,1,2,2,2,1]
 FASES = [[['T', 'T', 'T', 'T', 'T'],
         ['T', 'T', 'T', 'T', 'T'],
         ['S', 'C', 'C', 'C', 'F'],
@@ -39,7 +39,13 @@ FASES = [[['T', 'T', 'T', 'T', 'T'],
         ['T', 'T', 'T', 'P', 'T'],
         ['T', 'C', 'C', 'C', 'T'],
         ['T', 'P', 'T', 'T', 'T'],
-        ['S', 'C', 'T', 'T', 'T']]]
+        ['S', 'C', 'T', 'T', 'T']],
+        
+        [['T', 'T', 'C', 'C', 'C'],
+        ['T', 'T', 'P', 'T', 'C'],
+        ['T', 'T', 'C', 'T', 'C'],
+        ['T', 'T', 'C', 'T', 'C'],
+        ['T', 'T', 'F', 'T', 'S']]]
 
 
 CORES = {'C' : (179, 111, 201),
@@ -177,6 +183,8 @@ class Tabuleiro:
                 self.window.blit(self.personagem_R, (self.player_tile[0]+10,self.player_tile[1]+5))
             elif self.ori_per == 'D':
                 self.window.blit(self.personagem_D, (self.player_tile[0]+10,self.player_tile[1]+5))
+            elif self.ori_per == 'U':
+                self.window.blit(self.personagem_U, (self.player_tile[0]+10,self.player_tile[1]+5))
 
 
         elif self.contador > 1:
