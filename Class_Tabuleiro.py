@@ -1,4 +1,5 @@
 import time
+from numpy import False_
 import pygame
 from Class_Telas import Telas
 
@@ -59,7 +60,10 @@ class Tabuleiro:
 
         self.contador = 0
         self.fase_atu = 0
+        self.qtd_fase = len(self.fases)
         self.pontos_atu = 0
+
+        self.game_end = False
 
         self.end_tile = None
         self.point_tile = []
@@ -79,6 +83,8 @@ class Tabuleiro:
 
     def tabuleiro_window(self):
         y = self.tile_size * 2
+        if self.fase_atu  == self.qtd_fase:
+                return True
         for l in range(len(self.fases[self.fase_atu])):
             x = self.tile_size * 2
             for c in range(len(self.fases[self.fase_atu][l])):
@@ -111,8 +117,9 @@ class Tabuleiro:
             
         self.desenha_pontos()
         self.desenha_personagem()
-        self.tile_check()
-        self.window.blit(self.text_pontos,(self.tile_size*4+ self.text_width,0))
+        self.game_end = self.tile_check()
+        self.window.blit(self.text_pontos,(self.tile_size*4+ self.text_width,self.tile_size/3))
+        return self.game_end
         
         
 
@@ -129,14 +136,22 @@ class Tabuleiro:
                 self.contador = 0
                 self.tela.play = False
                 self.pontos_atu = 0
-        if self.end_tile.collidepoint(self.player_tile) and self.pontos_atu == self.pontos[self.fase_atu]:
+                self.game_inputs.clear()
+                self.tela.game_inputs.clear()
+        if self.fase_atu  == self.qtd_fase:
+            return True
+            
+        if self.end_tile.collidepoint(self.player_tile) and self.pontos_atu == self.pontos[self.fase_atu] and len(self.game_inputs) == 0:
             time.sleep(1)
             self.contador = 0
             self.tela.play = False
+        
             self.fase_atu += 1
             self.point_tile.clear()
             self.tabu_tile.clear()
             self.pontos_atu = 0
+            self.game_inputs.clear()
+            self.tela.game_inputs.clear()
         # testa colisao do quadrado seguido do fim
         # next_end = (self.end_tile[0]+self.tile_size,self.end_tile[1],self.end_tile[2])
         for tiles in self.tela.tile_outside_T:
@@ -144,6 +159,8 @@ class Tabuleiro:
                 self.contador = 0
                 self.tela.play = False
                 self.pontos_atu = 0
+                self.game_inputs.clear()
+                self.tela.game_inputs.clear()
 
 
 
@@ -203,7 +220,7 @@ class Tabuleiro:
                         self.point_tile.pop(i)
                         self.pontos_atu += 1
                         self.text_pontos = self.font.render(str(self.pontos_atu), True, (255, 255, 255))
-                time.sleep(1)
+                time.sleep(0.25)
             self.game_inputs.pop(0)
             time.sleep(0.25)
         else:      

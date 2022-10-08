@@ -1,0 +1,11 @@
+Instruções
+Seu personagem spawna no quadrado branco e tem que ir para o quadrato preto
+Você tem que seguir o caminho lilás, se cair no cinza a fase se reinicia
+Em algumas fases é necessário coletar pokebolas
+Você monta sua movimentação existem 4 opções de ações:
+-Andar
+-Virar para a Direita
+-Virar para a Esquerda
+-Coletar Pokebola
+O seu objetivo é chegar no quadrado final coletando as pokebolas no caminho
+ATENÇÃO: Não basta chegar ao final é necessário parar no quadrado
