@@ -3,8 +3,8 @@ from numpy import False_
 import pygame
 from Class_Telas import Telas
 
-ORIENTACOES = ['R','R','R','D','D']
-PONTOS = [0,0,1,2,2]
+ORIENTACOES = ['R','R','R','D','D','R']
+PONTOS = [0,0,1,2,2,2]
 FASES = [[['T', 'T', 'T', 'T', 'T'],
         ['T', 'T', 'T', 'T', 'T'],
         ['S', 'C', 'C', 'C', 'F'],
@@ -33,7 +33,13 @@ FASES = [[['T', 'T', 'T', 'T', 'T'],
         ['T', 'T', 'P', 'C', 'F'],
         ['S', 'T', 'C', 'T', 'T'],
         ['C', 'C', 'P', 'T', 'T'],
-        ['T', 'T', 'T', 'T', 'T']]]
+        ['T', 'T', 'T', 'T', 'T']],
+
+        [['T', 'T', 'T', 'C', 'F'],
+        ['T', 'T', 'T', 'P', 'T'],
+        ['T', 'C', 'C', 'C', 'T'],
+        ['T', 'P', 'T', 'T', 'T'],
+        ['S', 'C', 'T', 'T', 'T']]]
 
 
 CORES = {'C' : (179, 111, 201),
@@ -61,6 +67,7 @@ class Tabuleiro:
         self.contador = 0
         self.fase_atu = 0
         self.qtd_fase = len(self.fases)
+        print(self.qtd_fase)
         self.pontos_atu = 0
 
         self.game_end = False
@@ -193,7 +200,7 @@ class Tabuleiro:
     def muda_fase(self,event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_TAB:
-                if self.fase_atu != 4:
+                if self.fase_atu != self.qtd_fase:
                     self.fase_atu += 1
                     self.contador=0
                     self.point_tile.clear()
